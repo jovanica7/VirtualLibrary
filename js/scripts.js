@@ -62,8 +62,8 @@ function register(event) {
 }
 
 function addOrUpdateUser(data){
-	var users = localStorage.getObj("users");
 	if(!checkIfExists(data)) {
+		var users = localStorage.getObj("users");
 		users.push(data);
 		window.location.replace("login.html");
 	}
