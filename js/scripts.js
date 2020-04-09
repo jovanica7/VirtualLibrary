@@ -160,6 +160,7 @@ function searchBooks(event) {
 }
 
 function welcome() {
+	document.getElementById("searchBtn").disabled = true;
 	fetchBooks("book", 6);
 }
 
@@ -254,17 +255,27 @@ function createAndPopulateBookDetails(books, home) {
 		readMore.innerHTML = "Read More"
 		
 		if(home) {
-			// create "Add to Whishlist" button
+			// create "Add to Whishlist" / "Added" button
 			var addToWishlist = document.createElement("button");
 			addToWishlist.className = "btn btn-success";
 			// set id of the button to have id of the book
 			addToWishlist.setAttribute("id", bookId);
-			// call add-to-whishlist function
-			addToWishlist.onclick = function(event) {
-				addBookToWishlist(event);
-			}
 			btnDiv.appendChild(addToWishlist);
-			addToWishlist.innerHTML = "+ Add to Whishlist";			
+			
+			var current = localStorage.getObj("currentUser");
+			
+			if(current.whishlist.indexOf(bookId) >= 0) {	
+				addToWishlist.innerHTML = "Added!";
+				addToWishlist.disabled = true;		
+			}		
+			else {
+				// call add-to-whishlist function
+				addToWishlist.onclick = function(event) {
+					addBookToWishlist(event);
+				}
+				addToWishlist.innerHTML = "+ Add to Whishlist";
+			}
+						
 		}
 
 		else {
@@ -346,11 +357,6 @@ function addBookToWishlist(event) {
 		return;
 	}
 	
-	// update current's user whishlist
-	else if(current.whishlist.indexOf(event.srcElement.id) !== -1) {
-		alert("This book is already in the whishlist!");
-	}
-	
 	else {
 		current.whishlist.push(event.srcElement.id);
 		localStorage.setObj("currentUser", current);
@@ -416,9 +422,8 @@ async function getUserWhishlist() {
 	var books = await populateUserWhishlist(whishlist);
 	// check if whishlist is empty
 	if(books.length === 0) {
-		document.getElementById("result").innerHTML = "";
+		document.getElementById("result").innerHTML = "<center><h5>Search for books and pick the ones you like to populate the Wishlist.</h5><img src='book.jpg' alt='book' class='bookImage'/></center>";
 		document.getElementById("refreshWhishlist").style.visibility = "hidden";
-		alert("Your whishlist is empty!");
 	}
 	// populate the whishlist on button click
 	else {
