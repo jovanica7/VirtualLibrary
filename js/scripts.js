@@ -303,7 +303,13 @@ function createAndPopulateBookDetails(books, home) {
 		
 		// fill the details for clickable elements
 		if(books[i].volumeInfo.infoLink) {
-			var info = books[i].volumeInfo.infoLink;
+			var info;
+			if(home) {
+				info = books[i].volumeInfo.infoLink;
+			}
+			else {
+			info = `https://books.google.rs/books?id=${bookId}&source=gbs_api&redir_esc=y`;
+			}
 			imgClickable.setAttribute("href", info);
 			imgClickable.setAttribute("target", "_blank");
 			btnClickable.setAttribute("href", info);
