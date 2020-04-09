@@ -371,6 +371,7 @@ function removeBookFromWishlist(event) {
 		
 		document.getElementById(`book${event.srcElement.id}`).classList.add("removed");
 		document.getElementById(event.srcElement.id).disabled = true;
+		document.getElementById(event.srcElement.id).innerHTML = "Removed!";
 	} 
 }
 
