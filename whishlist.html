@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Virtual Library</title>
+
+    <meta name="description" content="Search for books through are virtual library!">
+    <meta name="author" content="Jovana">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link" href="home.html">Home</a>
+					</li>
+					<li id="profile" class="nav-item">
+						<a class="nav-link" href="profile.html">Profile</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="whishlist.html">Whishlist</a>
+					</li>
+					<li class="nav-item dropdown ml-md-auto">
+						 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">Actions</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="https://books.google.com/?hl=en" target="_blank">Visit Google Books</a>
+							<div class="dropdown-divider"></div> 
+							<a class="dropdown-item" href="login.html">Logout</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="cusTitle">
+			<div class="row">
+				<div class="col-sm-4"></div>
+					<div>
+						<button id="viewWhishlist" class="btn btn-success" onclick="createWhishlist()">View Whishlist</button>
+						<button id="refreshWhishlist" class="btn btn-warning hidden" onclick="refreshWhishlist()">Refresh Whishlist</button>
+					</div>
+				<div class="col-sm-4"></div>
+			</div>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<div id="result"></div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+	<script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

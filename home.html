@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Virtual Library</title>
+
+    <meta name="description" content="Search for books through are virtual library!">
+    <meta name="author" content="Jovana">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid leftAlign">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="home.html">Home</a>
+					</li>
+					<li id="profile" class="nav-item">
+						<a class="nav-link" href="profile.html">Profile</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="whishlist.html">Whishlist</a>
+					</li>
+					<li class="nav-item dropdown ml-md-auto">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">Actions</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="https://books.google.com/?hl=en" target="_blank">Visit Google Books</a>
+							<div class="dropdown-divider"></div> 
+							<a class="dropdown-item" href="login.html">Logout</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4" id="cusTitle">
+			<div class="row">
+				<div class="col-sm-4"></div>
+					<h3>
+						Virtual Library
+					</h3>
+				<div class="col-sm-4"></div>
+			</div>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<div class="row bottomAlign">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div id="search">
+					<form id="searchForm" onsubmit="searchBooks(event)">
+						<div class="form-group row">
+							<input type="search" id="bookName" class="form-control" placeholder="Search books..."/>
+							<div id="emptySearch" class="alert alert-warning form-text text-muted disabled" role="alert">
+								Please enter something in the search field.
+							</div>
+							<div id="emptyBookList" class="alert alert-info form-text text-muted disabled" role="alert">
+								Sorry, we couldn't find any book for your input.
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4"></div>
+									<button type="submit" class="btn btn-default col-sm-4">
+										Search
+									</button>	
+							<div class="col-sm-4"></div>
+						</div>
+					</form>
+				</div>	
+			</div>
+			<div class="col-md-4">
+				<button id="highlight" class="btn btn-primary col-sm-4" onclick="highlight()" disabled>
+						Highlight
+				</button>
+			</div>
+		</div>
+		<div id="result"></div>
+	</div>
+    <script src="js/jquery.min.js"></script>
+	<script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
