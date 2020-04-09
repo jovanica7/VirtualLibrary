@@ -137,6 +137,8 @@ function redirectToRegistration() {
 
 function searchBooks(event) {
 	event.preventDefault();
+	// prevent clicking button multiple times and creating duplicates
+	document.getElementById("searchBtn").disabled = true;
 	document.getElementById("highlight").disabled = true;
 	// remove results from the previous iteration
 	if(document.getElementById("result").hasChildNodes()) {
@@ -313,6 +315,12 @@ function createAndPopulateBookDetails(books, home) {
 			descrElem.innerHTML = description;
 		}
 	}
+	if(document.getElementById("viewWhishlist"))
+		document.getElementById("viewWhishlist").disabled = false;
+	if(document.getElementById("refreshWhishlist"))
+		document.getElementById("refreshWhishlist").disabled = false;
+	if(document.getElementById("searchBtn"))
+		document.getElementById("searchBtn").disabled = false;
 }
 
 function addBookToWishlist(event) {
@@ -340,6 +348,7 @@ function addBookToWishlist(event) {
 		localStorage.setObj("users", users);
 	
 		document.getElementById(event.srcElement.id).disabled = true;
+		document.getElementById(event.srcElement.id).innerHTML = "Added!"
 	}
 	
 }
@@ -378,7 +387,9 @@ async function populateUserWhishlist(books) {
 
 async function createWhishlist() {
 		// show the wishlist on button click
-		if(document.getElementById("viewWhishlist").innerHTML === "View Whishlist") {
+		if(document.getElementById("viewWhishlist").innerHTML === "View Wishlist") {
+			// prevent clicking button multiple times and creating duplicates
+			document.getElementById("viewWhishlist").disabled = true;
 			await getUserWhishlist();
 		}
 		
@@ -386,12 +397,14 @@ async function createWhishlist() {
 		else {
 			document.getElementById("refreshWhishlist").style.visibility = "hidden";
 			document.getElementById("result").innerHTML = "";
-			document.getElementById("viewWhishlist").innerHTML = "View Whishlist"; 
+			document.getElementById("viewWhishlist").innerHTML = "View Wishlist"; 
 		}
 
 }
 
 async function refreshWhishlist() {
+	// prevent clicking button multiple times and creating duplicates
+	document.getElementById("refreshWhishlist").disabled = true;
 	document.getElementById("result").innerHTML = "";
 	await getUserWhishlist();
 }
@@ -405,13 +418,13 @@ async function getUserWhishlist() {
 	if(books.length === 0) {
 		document.getElementById("result").innerHTML = "";
 		document.getElementById("refreshWhishlist").style.visibility = "hidden";
-		document.getElementById("viewWhishlist").innerHTML = "View Whishlist";
+		document.getElementById("viewWhishlist").innerHTML = "View Wishlist";
 		alert("Your whishlist is empty!");
 	}
 	// populate the whishlist on button click
 	else {
 		createAndPopulateBookDetails(books, false);
-		document.getElementById("viewWhishlist").innerHTML = "Hide Whishlist";
+		document.getElementById("viewWhishlist").innerHTML = "Hide Wishlist";
 		document.getElementById("refreshWhishlist").style.visibility = "visible";
 	}
 }
