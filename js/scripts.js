@@ -427,8 +427,8 @@ async function getUserWhishlist() {
 	document.getElementById("refreshWhishlist").style.display = "block";
 	// check if whishlist is empty
 	if(books.length === 0) {
-		document.getElementById("result").innerHTML = "<center><h5>Search for books and pick the ones you like to populate the Wishlist.</h5><img src='book.jpg' alt='book' class='bookImage'/></center>";
 		document.getElementById("refreshWhishlist").style.visibility = "hidden";
+		document.getElementById("pctr").innerHTML = "<center><h5>Search for books and pick the ones you like to populate the Wishlist.</h5><img src='book.jpg' alt='book' class='bookImage'/></center>";
 	}
 	// populate the whishlist on button click
 	else {
