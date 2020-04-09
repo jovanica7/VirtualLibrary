@@ -135,6 +135,7 @@ function redirectToRegistration() {
 	window.location.replace("register.html");
 }
 
+
 function searchBooks(event) {
 	event.preventDefault();
 	// prevent clicking button multiple times and creating duplicates
@@ -148,17 +149,23 @@ function searchBooks(event) {
 	if(search === "") {
 		document.getElementById("emptyBookList").classList.remove("showSearchAlert");
 		document.getElementById("emptySearch").classList.add("showSearchAlert");	
+		document.getElementById("searchBtn").disabled = false;
 	}
 	
 	else {
-		fetchBooks(search);
+		fetchBooks(search, 30);
 		document.getElementById("emptySearch").classList.remove("showSearchAlert");
 		
 	}
 }
 
-async function fetchBooks (input) {
-	var response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&orderBy=newest&maxResults=36`);
+function welcome() {
+	fetchBooks("book", 6);
+}
+
+
+async function fetchBooks (input, results) {
+	var response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&orderBy=newest&maxResults=${results}`);
 	var books = await response.json();
 	presentResults(books);	
 }
@@ -166,6 +173,7 @@ async function fetchBooks (input) {
 function presentResults(results) {
 	if(results.totalItems === 0) {
 		document.getElementById("emptyBookList").classList.add("showSearchAlert");
+		document.getElementById("searchBtn").disabled = false;
 	}
 	
 	else {
