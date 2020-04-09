@@ -162,11 +162,6 @@ async function fetchBooks (input) {
 }
 	
 function presentResults(results) {
-	// remove results from the previous iteration
-	if(document.getElementById("result").hasChildNodes()) {
-		document.getElementById("result").innerHTML = "";
-	}
-	
 	if(results.totalItems === 0) {
 		document.getElementById("emptyBookList").classList.add("showSearchAlert");
 	}
@@ -281,7 +276,7 @@ function createAndPopulateBookDetails(books, home) {
 		// fill the title element
 		if(books[i].volumeInfo.title) {
 			var title = books[i].volumeInfo.title;
-			// some items have multiple titles, this picks first one
+			// some items have multiple titles, this picks the first one
 			if(title.includes(",")) {
 				titleElem.innerHTML = title.substring(0, title.indexOf(","));
 			}
@@ -429,6 +424,7 @@ function getProfileInfo() {
 	"<b>" + "Username - " + "</b>"  + current.username + "<br />" +
 	"<b>" + "Email - " + "</b>"  + current.email + "<br />" + 
 	"<b>" + "Password - " + "</b>"  + current.password;
+	// fill the update once the page is loaded
 	fillFormWithUserData(current);
 }
 
@@ -470,6 +466,7 @@ function indexOfObject(obj, array) {
 
 function clearForm() {
 	document.getElementById("userExists").style.display = "none";
+	fillFormWithUserData(localStorage.getObj("currentUser"));
 }
 
 function fillFormWithUserData(currentUser) {
