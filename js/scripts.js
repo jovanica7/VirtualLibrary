@@ -65,7 +65,7 @@ function addOrUpdateUser(data){
 	if(!checkIfExists(data)) {
 		var users = localStorage.getObj("users");
 		users.push(data);
-		window.location.replace("login.html");
+		window.location.replace("index.html");
 	}
     
     return users;
@@ -83,6 +83,7 @@ function checkIfExists(data) {
 	var exists = false;
     if(users === null) {
 	  users = [];
+	  localStorage.setObj("users", users);
 	}
 	else {	
 		users.forEach(
