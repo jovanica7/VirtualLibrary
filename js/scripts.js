@@ -405,12 +405,14 @@ async function populateUserWhishlist(books) {
 }
 
 async function createWhishlist() {
+		if(document.getElementById("loader"))
+		document.getElementById("loader").style.display = "block";
 		await getUserWhishlist();
 }
 
 async function refreshWhishlist() {
-	// prevent clicking button multiple times and creating duplicates
-	document.getElementById("refreshWhishlist").disabled = true;
+	document.getElementById("loader").style.display = "block";
+	document.getElementById("refreshWhishlist").style.display = "none";
 	document.getElementById("result").innerHTML = "";
 	await getUserWhishlist();
 }
@@ -420,6 +422,9 @@ async function getUserWhishlist() {
 	var whishlist = current.whishlist;
 	// wait for API calls to finish
 	var books = await populateUserWhishlist(whishlist);
+	// from this point, populating the wishlist page is fast
+	document.getElementById("loader").style.display = "none";
+	document.getElementById("refreshWhishlist").style.display = "block";
 	// check if whishlist is empty
 	if(books.length === 0) {
 		document.getElementById("result").innerHTML = "<center><h5>Search for books and pick the ones you like to populate the Wishlist.</h5><img src='book.jpg' alt='book' class='bookImage'/></center>";
