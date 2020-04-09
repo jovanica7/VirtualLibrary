@@ -12,7 +12,7 @@
     <link href="css/style.css" rel="stylesheet">
 
   </head>
-  <body>
+  <body onload="createWhishlist()">
 
     <div class="container-fluid">
 		<div class="row">
@@ -44,7 +44,6 @@
 			<div class="row">
 				<div class="col-sm-4"></div>
 					<div>
-						<button id="viewWhishlist" class="btn btn-success" onclick="createWhishlist()">View Wishlist</button>
 						<button id="refreshWhishlist" class="btn btn-warning hidden" onclick="refreshWhishlist()">Refresh Wishlist</button>
 					</div>
 				<div class="col-sm-4"></div>
