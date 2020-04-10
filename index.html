@@ -17,7 +17,7 @@
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4"></div>
-			<div class="col-md-4" id="cusTitle">
+			<div class="col-md-4 cusTitle">
 			<div class="row">
 				<div class="col-sm-4"></div>
 					<h3>
@@ -37,14 +37,14 @@
 						<label for="username" class="col-sm-3 col-form-label">
 						Username* </label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="username" oninvalid="this.setCustomValidity('Please enter a valid username.')" oninput="setCustomValidity('')" pattern="^.{6,}$" title="Must be at least six characters long" required/> 
+							<input type="text" class="form-control" id="username" oninvalid="this.setCustomValidity('Must be at least six characters long.')" oninput="setCustomValidity('')" pattern="^.{6,}$" title="Must be at least six characters long." required/> 
 						</div>
 					</div>
 					<div class="form-group row"> 
 						<label for="password" class="col-sm-3 col-form-label">
 						Password* </label>
 						<div class="col-sm-9">
-							<input type="password" class="form-control" id="password" oninvalid="this.setCustomValidity('Please enter a valid password.')" oninput="setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters." required/> 
+							<input type="password" class="form-control" id="password" oninvalid="this.setCustomValidity('Must contain at least one number, uppercase and lowercase letter and at least 6 or more characters.')" oninput="setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number, uppercase and lowercase letter and at least 6 or more characters." required/> 
 							<div id="userInvalid" class="alert alert-danger form-text text-muted disabled" role="alert">
 								Username or password is incorrect! If you are a new user, click below to register.
 							</div>

@@ -1,6 +1,10 @@
-#cusTitle {
+body {
+	margin: 10px;
+}
+
+.cusTitle {
 	margin-top: 50px;
-	margin-bottom:30px;
+	margin-bottom: 30px;
 }
 
 .bottomAlign {
