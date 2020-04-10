@@ -17,6 +17,7 @@ function register(event) {
 	  "wishlist":  	[]
   }
   
+  // if this is actually update of the current user
   if(localStorage.currentUser) {
 		if(checkIfExists(newUser))
 			return;
@@ -78,12 +79,11 @@ function checkIfExists(data) {
 		var current = localStorage.getObj("currentUser");
 		var index = indexOfObject(current, users);
 		users.splice(index, 1);
-		localStorage.setObj("users", users);
 	}
 	var exists = false;
     if(users === null) {
-	  users = [];
-	  localStorage.setObj("users", users);
+		users = [];
+		localStorage.setObj("users", users);
 	}
 	else {	
 		users.forEach(
@@ -97,6 +97,7 @@ function checkIfExists(data) {
 		);
 	}
 	
+	var users = localStorage.getObj("users");
 	return exists;
 }
 
