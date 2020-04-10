@@ -14,7 +14,7 @@ function register(event) {
 	  "username": 		username.value,
 	  "email": 			email.value,
 	  "password": 		password.value,
-	  "whishlist":  	[]
+	  "wishlist":  	[]
   }
   
   if(localStorage.currentUser) {
@@ -33,8 +33,8 @@ function register(event) {
 		}
 		
 		else {
-			var whishlist = current.whishlist;
-			newUser.whishlist = whishlist;
+			var wishlist = current.wishlist;
+			newUser.wishlist = wishlist;
 			var users = localStorage.getObj("users");
 			var index = indexOfObject(current, users);
 			
@@ -255,7 +255,7 @@ function createAndPopulateBookDetails(books, home) {
 		readMore.innerHTML = "Read More"
 		
 		if(home) {
-			// create "Add to Whishlist" / "Added" button
+			// create "Add to Wishlist" / "Added" button
 			var addToWishlist = document.createElement("button");
 			addToWishlist.className = "btn btn-success";
 			// set id of the button to have id of the book
@@ -264,33 +264,33 @@ function createAndPopulateBookDetails(books, home) {
 			
 			var current = localStorage.getObj("currentUser");
 			
-			if(current.whishlist.indexOf(bookId) >= 0) {	
+			if(current.wishlist.indexOf(bookId) >= 0) {	
 				addToWishlist.innerHTML = "Added!";
 				addToWishlist.disabled = true;		
 			}		
 			else {
-				// call add-to-whishlist function
+				// call add-to-wishlist function
 				addToWishlist.onclick = function(event) {
 					addBookToWishlist(event);
 				}
-				addToWishlist.innerHTML = "+ Add to Whishlist";
+				addToWishlist.innerHTML = "+ Add to Wishlist";
 			}
 						
 		}
 
 		else {
-			// create "Remove from Whishlist" button
-			var removeToWishlist = document.createElement("button");
-			removeToWishlist.className = "btn btn-danger";
+			// create "Remove from Wishlist" button
+			var removeFromWishlist = document.createElement("button");
+			removeFromWishlist.className = "btn btn-danger";
 			// set id of the button to have id of the book
 			var bookId = books[i].id;
-			removeToWishlist.setAttribute("id", bookId);
-			// call remove-from-whishlist function
-			removeToWishlist.onclick = function(event) {
+			removeFromWishlist.setAttribute("id", bookId);
+			// call remove-from-wishlist function
+			removeFromWishlist.onclick = function(event) {
 				removeBookFromWishlist(event);
 			}
-			btnDiv.appendChild(removeToWishlist);
-			removeToWishlist.innerHTML = "- Remove from Whishlist";
+			btnDiv.appendChild(removeFromWishlist);
+			removeFromWishlist.innerHTML = "- Remove from Wishlist";
 		}
 		
 		
@@ -340,8 +340,8 @@ function createAndPopulateBookDetails(books, home) {
 			descrElem.innerHTML = description;
 		}
 	}
-	if(document.getElementById("refreshWhishlist"))
-		document.getElementById("refreshWhishlist").disabled = false;
+	if(document.getElementById("refreshWishlist"))
+		document.getElementById("refreshWishlist").disabled = false;
 	if(document.getElementById("searchBtn"))
 		document.getElementById("searchBtn").disabled = false;
 }
@@ -351,14 +351,14 @@ function addBookToWishlist(event) {
 	var users = localStorage.getObj("users");
 	var index = indexOfObject(current, users);
 	
-	// check if whishlist reached maximum
-	if(current.whishlist.length === 30) {
-		alert("Maximum number of books (30) in the whishlist reached!");
+	// check if wishlist reached maximum
+	if(current.wishlist.length === 30) {
+		alert("Maximum number of books (30) in the wishlist reached!");
 		return;
 	}
 	
 	else {
-		current.whishlist.push(event.srcElement.id);
+		current.wishlist.push(event.srcElement.id);
 		localStorage.setObj("currentUser", current);
 	
 		// update list of all users
@@ -373,14 +373,14 @@ function addBookToWishlist(event) {
 
 function removeBookFromWishlist(event) {
 	var txt;
-	if (confirm("Are you sure you want to remove this book from whishlist?")) {
+	if (confirm("Are you sure you want to remove this book from wishlist?")) {
 		var current = localStorage.getObj("currentUser");
 		var users = localStorage.getObj("users");
 		var index = indexOfObject(current, users);
 		
-		// update current's user whishlist
-		var windex = current.whishlist.indexOf(event.srcElement.id);
-		current.whishlist.splice(windex, 1);
+		// update current's user wishlist
+		var windex = current.wishlist.indexOf(event.srcElement.id);
+		current.wishlist.splice(windex, 1);
 		localStorage.setObj("currentUser", current);
 		
 		// update list of all users
@@ -393,7 +393,7 @@ function removeBookFromWishlist(event) {
 	} 
 }
 
-async function populateUserWhishlist(books) {
+async function populateUserWishlist(books) {
 	var results = [];
 	// call Google API for book details, based on book id
 	for(var bookId of books) {
@@ -404,36 +404,36 @@ async function populateUserWhishlist(books) {
 	return results;
 }
 
-async function createWhishlist() {
+async function createWishlist() {
 		if(document.getElementById("loader"))
 		document.getElementById("loader").style.display = "block";
-		await getUserWhishlist();
+		await getUserWishlist();
 }
 
-async function refreshWhishlist() {
+async function refreshWishlist() {
 	document.getElementById("loader").style.display = "block";
-	document.getElementById("refreshWhishlist").style.display = "none";
+	document.getElementById("refreshWishlist").style.display = "none";
 	document.getElementById("result").innerHTML = "";
-	await getUserWhishlist();
+	await getUserWishlist();
 }
 
-async function getUserWhishlist() {
+async function getUserWishlist() {
 	var current = localStorage.getObj("currentUser");
-	var whishlist = current.whishlist;
+	var wishlist = current.wishlist;
 	// wait for API calls to finish
-	var books = await populateUserWhishlist(whishlist);
+	var books = await populateUserWishlist(wishlist);
 	// from this point, populating the wishlist page is fast
 	document.getElementById("loader").style.display = "none";
-	document.getElementById("refreshWhishlist").style.display = "block";
-	// check if whishlist is empty
+	document.getElementById("refreshWishlist").style.display = "block";
+	// check if wishlist is empty
 	if(books.length === 0) {
-		document.getElementById("refreshWhishlist").style.visibility = "hidden";
+		document.getElementById("refreshWishlist").style.visibility = "hidden";
 		document.getElementById("pctr").innerHTML = "<center><h5>Search for books and pick the ones you like to populate the Wishlist.</h5><img src='book.jpg' alt='book' class='bookImage'/></center>";
 	}
-	// populate the whishlist on button click
+	// populate the wishlist on button click
 	else {
 		createAndPopulateBookDetails(books, false);
-		document.getElementById("refreshWhishlist").style.visibility = "visible";
+		document.getElementById("refreshWishlist").style.visibility = "visible";
 	}
 }
 
